@@ -123,7 +123,10 @@ class TgeConnector:
     @staticmethod
     def _get_rows_of_table(html_parser: Tag) -> list[Tag]:
         valid_pattern = r"^\d\d?-\d\d?$"
-        all_rows = html_parser.select("#footable_kontrakty_godzinowe > tbody")[0].select("tr")
+        tables = html_parser.select("#footable_kontrakty_godzinowe > tbody")
+        if len(tables) == 0:
+            return []
+        all_rows = tables[0].select("tr")
         filtered_rows = list(filter(lambda r: re.match(valid_pattern, r.select("td")[0].text.strip()), all_rows))
         return filtered_rows
 

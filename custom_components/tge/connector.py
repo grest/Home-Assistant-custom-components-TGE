@@ -93,6 +93,8 @@ class TgeConnector:
         if date != date_of_data:
             return None
         data = TgeConnector._parse_timetable(parser, date)
+        if len(list(filter(lambda d: d.fixing1_rate != 0, data))) == 0:
+            return None
         return TgeDayData(date, data)
 
     @staticmethod

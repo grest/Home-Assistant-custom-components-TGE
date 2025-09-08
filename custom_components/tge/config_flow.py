@@ -26,7 +26,7 @@ class TgeFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):
         self._async_abort_entries_match()
         if user_input is not None:
             return self.async_create_entry(title="TGE", data=user_input)
-        return self.async_show_form(step_id="user")
+        return self.async_show_form(step_id="user", last_step=True)
 
     async_step_import = async_step_user
 
